@@ -10,13 +10,18 @@ export default async function MembersLayout({
   const supabase = await getSupabaseServerClient();
   const user = supabase ? (await supabase.auth.getUser()).data.user : null;
 
-  if (!user) {
+  // If Supabase is not configured, run in demo mode (no auth required).
+  const demoMode = !process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+  if (!user && !demoMode) {
     redirect("/login");
   }
 
+  const email = user?.email ?? "demo@vaulted.app";
+
   return (
     <div className="min-h-screen bg-base">
-      <AppNav email={user.email ?? "member"} />
+      <AppNav email={email} />
       <main className="pt-14">{children}</main>
     </div>
   );

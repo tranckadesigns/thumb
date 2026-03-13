@@ -7,15 +7,8 @@ import {
   Download,
   Pencil,
   Search,
-  DollarSign,
-  Users,
-  BarChart2,
-  Flame,
-  GitCompare,
-  Star,
-  MessageCircle,
-  ShieldCheck,
-  Sparkles,
+  Check,
+  Shield,
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -25,9 +18,22 @@ import {
   ChallengeProgressOverlay,
   BestWorstOverlay,
   CountdownTimerOverlay,
+  SubscriberMilestoneOverlay,
+  GrowthChartOverlay,
+  AlertBannerOverlay,
+  InstagramAlertOverlay,
+  ShopifySalesOverlay,
+  CTRAnalyticsOverlay,
+  RatingStarsOverlay,
+  ReactionBubbleOverlay,
+  PollResultOverlay,
 } from "@/components/marketing/asset-overlays";
 import { TestimonialsSection } from "@/components/marketing/testimonials";
 import { PsdShowcase } from "@/components/marketing/psd-showcase";
+import { FAQSection } from "@/components/marketing/faq";
+import { StatsStrip } from "@/components/marketing/stats-strip";
+import { ForCreatorsSection } from "@/components/marketing/for-creators";
+import { PricingPreviewSection } from "@/components/marketing/pricing-preview";
 import { cn } from "@/lib/utils/cn";
 
 // ─── YouTube Thumbnail Mockup ─────────────────────────────────────────────────
@@ -67,9 +73,7 @@ function ThumbnailMockup({
         <div className="absolute inset-0" style={{ background: gradient }} />
         <div
           className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 rounded-full opacity-30"
-          style={{
-            background: `radial-gradient(circle, ${accentColor}50 0%, transparent 70%)`,
-          }}
+          style={{ background: `radial-gradient(circle, ${accentColor}50 0%, transparent 70%)` }}
         />
         <div className="absolute left-4 top-4 max-w-[48%]">
           <p
@@ -95,9 +99,7 @@ function ThumbnailMockup({
       <div className="mt-3 flex items-start gap-2.5 px-0.5">
         <div
           className="h-8 w-8 flex-shrink-0 rounded-full border border-border"
-          style={{
-            background: `linear-gradient(135deg, ${accentColor}25 0%, transparent 100%)`,
-          }}
+          style={{ background: `linear-gradient(135deg, ${accentColor}25 0%, transparent 100%)` }}
         />
         <div className="min-w-0 flex-1">
           <p className="line-clamp-2 text-sm font-medium leading-tight text-content-primary">
@@ -115,22 +117,44 @@ function ThumbnailMockup({
 // ─── 1. Hero ──────────────────────────────────────────────────────────────────
 
 function HeroSection() {
+  const includes = [
+    "Fully layered .PSD files",
+    "Commercial license included",
+    "New assets added monthly",
+    "Instant download, no queue",
+  ];
+
   return (
-    <section className="relative overflow-hidden px-6 pb-20 pt-24">
-      {/* Animated background glow */}
+    <section className="relative overflow-hidden px-6 pb-24 pt-28">
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] animate-glow-pulse"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[640px]"
         style={{
           background:
-            "radial-gradient(ellipse 80% 55% at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 100%)",
+            "radial-gradient(ellipse 80% 50% at 50% -5%, rgba(201,169,110,0.12) 0%, transparent 100%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute left-[10%] top-[20%] h-72 w-72 rounded-full opacity-[0.035] blur-3xl animate-float"
+        style={{ background: "radial-gradient(circle, #C9A96E 0%, transparent 70%)" }}
+      />
+      <div
+        className="pointer-events-none absolute right-[8%] top-[35%] h-56 w-56 rounded-full opacity-[0.025] blur-3xl animate-float-delayed"
+        style={{ background: "radial-gradient(circle, #C9A96E 0%, transparent 70%)" }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.022]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
+          backgroundSize: "72px 72px",
         }}
       />
 
       <div className="relative mx-auto max-w-5xl">
-        {/* Headline block */}
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-5xl text-center">
+
           <Reveal>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-base-surface px-3.5 py-1.5">
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-base-surface px-3.5 py-1.5">
               <span
                 className="h-1.5 w-1.5 rounded-full bg-accent"
                 style={{ animation: "accentDot 3s ease-in-out infinite" }}
@@ -143,9 +167,7 @@ function HeroSection() {
 
           <Reveal delay={80}>
             <h1 className="text-5xl font-semibold leading-[1.05] tracking-tightest text-content-primary md:text-6xl lg:text-7xl">
-              Premium PSD assets
-              <br />
-              for{" "}
+              Premium PSD assets for{" "}
               <span
                 style={{
                   background:
@@ -163,30 +185,35 @@ function HeroSection() {
           </Reveal>
 
           <Reveal delay={160}>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-content-secondary">
-              A curated library of fully layered thumbnail graphics — revenue
-              alerts, subscriber milestones, before/after comparisons, countdown
-              timers, and more. Edit the numbers in Photoshop. Export. Done.
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-content-secondary">
+              The only library built specifically for YouTube thumbnail overlays.
+              Fully layered PSDs — revenue notifications, subscriber milestones,
+              countdowns, comparisons, and more. Customize in under 60 seconds.
             </p>
           </Reveal>
 
-          <Reveal delay={240}>
+          <Reveal delay={230}>
+            <div className="mx-auto mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              {includes.map((item) => (
+                <div key={item} className="flex items-center gap-1.5">
+                  <Check className="h-3.5 w-3.5 text-accent flex-shrink-0" />
+                  <span className="text-xs text-content-muted">{item}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={300}>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/signup"
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "active:scale-[0.97] transition-transform"
-                )}
+                className={cn(buttonVariants({ size: "lg" }), "active:scale-[0.97] transition-transform")}
               >
                 Get access
               </Link>
               <Link
                 href="/pricing"
-                className={cn(
-                  buttonVariants({ variant: "ghost", size: "lg" }),
-                  "active:scale-[0.97] transition-transform"
-                )}
+                className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "active:scale-[0.97] transition-transform")}
               >
                 View pricing
                 <ChevronRight className="h-4 w-4" />
@@ -194,26 +221,20 @@ function HeroSection() {
             </div>
           </Reveal>
 
-          <Reveal delay={300}>
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-              {[
-                "Fully layered PSD",
-                "Edit in under 60 seconds",
-                "12 categories",
-                "New assets monthly",
-              ].map((item) => (
-                <span key={item} className="flex items-center gap-1.5 text-xs text-content-muted">
-                  <span className="text-accent">✓</span>
-                  {item}
-                </span>
-              ))}
-            </div>
+          <Reveal delay={360}>
+            <p className="mt-5 text-sm text-content-muted">
+              Trusted by{" "}
+              <span className="text-content-secondary">1,200+</span> YouTube creators
+              {" · "}
+              <span className="text-content-secondary">180+</span> assets across{" "}
+              <span className="text-content-secondary">12</span> categories
+            </p>
           </Reveal>
         </div>
 
-        {/* Product preview — visible immediately on scroll */}
-        <div className="mt-16">
-          <Reveal delay={360}>
+        {/* Product preview grid */}
+        <div className="mt-20">
+          <Reveal>
             <p className="mb-6 text-center text-[11px] font-medium tracking-widest text-content-muted uppercase">
               From the library
             </p>
@@ -227,86 +248,110 @@ function HeroSection() {
               { type: "challenge" as const, title: "Challenge Progress Bar" },
               { type: "reaction" as const, title: "Reaction Bubbles" },
             ].map(({ type, title }, i) => (
-              <Reveal key={type} delay={360 + i * 60}>
+              <div
+                key={type}
+                style={{
+                  opacity: 0,
+                  animation: `slideUp 0.55s cubic-bezier(0.16,1,0.3,1) ${500 + i * 90}ms forwards`,
+                }}
+              >
                 <AssetCard overlayType={type} title={title} />
-              </Reveal>
+              </div>
             ))}
           </div>
+          <Reveal delay={400}>
+            <div className="mt-10 flex justify-center">
+              <a
+                href="/login"
+                className="inline-flex items-center gap-2.5 rounded-full border border-border bg-base-elevated px-6 py-3 text-sm font-medium text-content-primary transition-colors duration-200 hover:border-border-strong hover:bg-base-surface"
+              >
+                Explore the full library
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-content-muted">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
   );
 }
 
-// ─── 2. Problem ───────────────────────────────────────────────────────────────
+// ─── 3. Problem ───────────────────────────────────────────────────────────────
 
 function ProblemSection() {
   const pains = [
-    "Building custom overlay graphics from scratch takes 1–2 hours per video",
-    "Generic template sites don't look like real platform notifications",
-    "Hiring a designer for every thumbnail isn't scalable",
+    {
+      title: "Building from scratch",
+      desc: "Custom overlay graphics take 1–2 hours per video — time that compounds fast across a busy upload schedule.",
+    },
+    {
+      title: "Generic template sites",
+      desc: "Most template sites don't understand thumbnails. The results look like dashboard widgets, not authentic platform notifications.",
+    },
+    {
+      title: "Hiring designers",
+      desc: "Outsourcing every thumbnail isn't a system. It's expensive, slow, and creates a bottleneck on every video.",
+    },
   ];
 
   return (
-    <section className="border-t border-border bg-base-surface px-6 py-20">
+    <section className="border-t border-border bg-base-surface px-6 py-24">
       <div className="mx-auto max-w-4xl">
-        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-          <Reveal>
-            <div>
-              <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
-                The old way
-              </p>
-              <h2 className="text-3xl font-semibold leading-snug tracking-tight text-content-primary">
-                Thumbnail overlays take hours you don&apos;t have.
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-content-secondary">
-                High-performing thumbnails use overlays that look like real
-                platform data — revenue alerts, subscriber counts, payout
-                notifications. Most creators either skip them entirely or settle
-                for templates that feel nothing like the real thing.
-              </p>
-            </div>
-          </Reveal>
+        <Reveal>
+          <div className="mb-14 text-center">
+            <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
+              The problem
+            </p>
+            <h2 className="text-3xl font-semibold leading-snug tracking-tight text-content-primary md:text-4xl">
+              High-performing thumbnails take time
+              <br className="hidden sm:block" /> most creators don&apos;t have.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-content-secondary">
+              Revenue overlays, subscriber milestones, countdown timers — these
+              details drive clicks. But making them look authentic is exactly
+              where most creators get stuck.
+            </p>
+          </div>
+        </Reveal>
 
-          <Reveal delay={100}>
-            <ul className="space-y-3">
-              {pains.map((pain, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 rounded-xl border border-border bg-base-elevated p-4 transition-colors duration-200 hover:border-border-strong"
-                >
-                  <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-error/15 text-[10px] font-bold text-error">
-                    ✕
-                  </div>
-                  <p className="text-sm leading-relaxed text-content-secondary">{pain}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {pains.map((pain, i) => (
+            <Reveal key={pain.title} delay={i * 80}>
+              <div className="flex flex-col gap-3 rounded-xl border border-error/10 bg-error/[0.03] p-6 transition-colors duration-200 hover:border-error/20">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-error/15 text-[10px] font-bold text-error">
+                  ✕
+                </div>
+                <p className="text-sm font-semibold text-content-primary">{pain.title}</p>
+                <p className="text-sm leading-relaxed text-content-secondary">{pain.desc}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-// ─── 3. Solution ──────────────────────────────────────────────────────────────
+// ─── 4. Solution ──────────────────────────────────────────────────────────────
 
 function SolutionSection() {
   const attributes = [
     {
       icon: Layers,
       title: "Fully layered PSD",
-      desc: "Every element on its own named layer. Text, backgrounds, effects, icons — all independently editable. Nothing merged or flattened.",
+      desc: "Every element on its own named layer — text, backgrounds, effects, icons. Nothing merged, nothing flattened.",
     },
     {
       icon: Zap,
-      title: "Swap any number",
+      title: "Swap any number in seconds",
       desc: "Click the text layer, type your value, export. Most assets take under 60 seconds to customize for your video.",
     },
     {
-      icon: Star,
-      title: "Built for thumbnails",
-      desc: "Not UI components repurposed as overlays. Designed specifically to sit inside a YouTube thumbnail and look authentic.",
+      icon: Download,
+      title: "Instant download",
+      desc: "No export queues, no waiting. Click download and the PSD is yours immediately. Works on any upload schedule.",
     },
     {
       icon: RefreshCw,
@@ -316,18 +361,22 @@ function SolutionSection() {
   ];
 
   return (
-    <section className="border-t border-border px-6 py-20">
+    <section className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <Reveal>
-          <div className="mb-12 text-center">
+          <div className="mb-14 text-center">
             <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
               What Vaulted provides
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
-              A curated library of premium
+              The library that actually
               <br />
-              thumbnail PSD assets.
+              understands thumbnails.
             </h2>
+            <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-content-secondary">
+              Every asset is purpose-built for the thumbnail format — not
+              adapted from a UI kit or repurposed from a template pack.
+            </p>
           </div>
         </Reveal>
 
@@ -336,17 +385,13 @@ function SolutionSection() {
             const Icon = attr.icon;
             return (
               <Reveal key={attr.title} delay={i * 80}>
-                <div className="group flex flex-col gap-4 rounded-xl border border-border bg-base-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:bg-base-elevated hover:shadow-elevated">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-base-elevated transition-colors duration-300 group-hover:border-accent/30">
+                <div className="group flex flex-col gap-4 rounded-xl border border-border bg-base-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/20 hover:bg-base-elevated hover:shadow-elevated">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-base-elevated transition-colors duration-300 group-hover:border-accent/30 group-hover:bg-accent/5">
                     <Icon className="h-4 w-4 text-accent" />
                   </div>
                   <div>
-                    <p className="mb-1.5 text-sm font-semibold text-content-primary">
-                      {attr.title}
-                    </p>
-                    <p className="text-sm leading-relaxed text-content-secondary">
-                      {attr.desc}
-                    </p>
+                    <p className="mb-1.5 text-sm font-semibold text-content-primary">{attr.title}</p>
+                    <p className="text-sm leading-relaxed text-content-secondary">{attr.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -358,7 +403,268 @@ function SolutionSection() {
   );
 }
 
-// ─── 4. Real Thumbnails ───────────────────────────────────────────────────────
+// ─── 5. Comparison ────────────────────────────────────────────────────────────
+
+const comparisonRows = [
+  {
+    label: "Designed for",
+    theirs: "Generic UI kits adapted for thumbnails",
+    ours: "Built from scratch for YouTube thumbnails",
+  },
+  {
+    label: "File format",
+    theirs: "Flat PNG or JPEG — nothing is editable",
+    ours: "Fully layered PSD — every element on its own layer",
+  },
+  {
+    label: "Edit speed",
+    theirs: "Needs a designer, or hours on your own",
+    ours: "Click a text layer, type your number. Under 60 seconds.",
+  },
+  {
+    label: "Library updates",
+    theirs: "One-time purchase — static, never grows",
+    ours: "New assets every month, included automatically",
+  },
+  {
+    label: "Exclusivity",
+    theirs: "Sold to thousands — same look as everyone else",
+    ours: "Members-only library, curated and controlled",
+  },
+  {
+    label: "License",
+    theirs: "Personal use only — no commercial rights",
+    ours: "Full commercial license — clients and sponsors included",
+  },
+];
+
+function ComparisonSection() {
+  return (
+    <section className="border-t border-border px-6 py-24">
+      <div className="mx-auto max-w-5xl">
+        <Reveal>
+          <div className="mb-14 text-center">
+            <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
+              Why creators switch
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
+              Not all thumbnail assets
+              <br />
+              are built the same.
+            </h2>
+            <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-content-secondary">
+              Most template packs are designed for aesthetics, not performance.
+              Vaulted is the only library built specifically around what actually
+              drives clicks on YouTube.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="overflow-hidden rounded-2xl border border-border">
+            {/* Column headers */}
+            <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-border bg-base-surface">
+              <div className="px-6 py-4" />
+              <div className="border-l border-border px-6 py-4">
+                <p className="text-xs font-medium text-content-muted">Other template packs</p>
+              </div>
+              <div className="border-l border-accent/20 bg-accent/[0.04] px-6 py-4">
+                <p className="text-xs font-semibold text-accent">Vaulted</p>
+              </div>
+            </div>
+
+            {/* Rows */}
+            {comparisonRows.map((row, i) => (
+              <div
+                key={row.label}
+                className={cn(
+                  "grid grid-cols-[1fr_1fr_1fr] border-b border-border last:border-b-0",
+                  i % 2 === 0 ? "bg-base" : "bg-base-surface"
+                )}
+              >
+                {/* Attribute label */}
+                <div className="flex items-center px-6 py-4">
+                  <p className="text-sm font-medium text-content-primary">{row.label}</p>
+                </div>
+
+                {/* Theirs */}
+                <div className="flex items-start gap-2.5 border-l border-border px-6 py-4">
+                  <span className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-error/10 text-[9px] font-bold text-error">
+                    ✕
+                  </span>
+                  <p className="text-sm leading-relaxed text-content-muted">{row.theirs}</p>
+                </div>
+
+                {/* Ours */}
+                <div className="flex items-start gap-2.5 border-l border-accent/20 bg-accent/[0.04] px-6 py-4">
+                  <span className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-accent/15 text-[9px] font-bold text-accent">
+                    ✓
+                  </span>
+                  <p className="text-sm leading-relaxed text-content-secondary">{row.ours}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={160}>
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/signup"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "active:scale-[0.97] transition-transform"
+              )}
+            >
+              Start with Vaulted
+            </Link>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+// ─── 6. Category Showcase ─────────────────────────────────────────────────────
+
+const categoryData = [
+  { name: "Revenue", assets: 4, Overlay: YouTubeRevenueOverlay, desc: "Earnings, payouts & income notifications" },
+  { name: "Subscribers", assets: 4, Overlay: SubscriberMilestoneOverlay, desc: "Milestone popups & live counters" },
+  { name: "Growth", assets: 3, Overlay: GrowthChartOverlay, desc: "Views, charts & channel performance" },
+  { name: "Alerts", assets: 3, Overlay: AlertBannerOverlay, desc: "Live alerts, breaking news & warnings" },
+  { name: "Social", assets: 3, Overlay: InstagramAlertOverlay, desc: "Instagram, Twitter & TikTok proof" },
+  { name: "Commerce", assets: 3, Overlay: ShopifySalesOverlay, desc: "Sales, products & ecommerce data" },
+  { name: "Analytics", assets: 3, Overlay: CTRAnalyticsOverlay, desc: "CTR, impressions & watch time" },
+  { name: "Challenges", assets: 3, Overlay: ChallengeProgressOverlay, desc: "Progress bars, streaks & day trackers" },
+  { name: "Comparisons", assets: 3, Overlay: BestWorstOverlay, desc: "Before/after & best vs worst frames" },
+  { name: "Ratings", assets: 3, Overlay: RatingStarsOverlay, desc: "Stars, scores & review summaries" },
+  { name: "Timers", assets: 3, Overlay: CountdownTimerOverlay, desc: "Countdown clocks & live event timers" },
+  { name: "Reactions", assets: 4, Overlay: ReactionBubbleOverlay, desc: "Polls, votes & emoji reactions" },
+];
+
+function CategoryShowcaseSection() {
+  return (
+    <section className="border-t border-border bg-base-surface px-6 py-24">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <div className="mb-14 text-center">
+            <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
+              Browse the library
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
+              12 categories.
+              <br />
+              Every thumbnail format covered.
+            </h2>
+            <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-content-secondary">
+              One subscription. Instant access to every category, every asset —
+              with new additions every month.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+          {categoryData.map(({ name, assets, Overlay, desc }, i) => (
+            <Reveal key={name} delay={i * 40}>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl border border-border bg-base-elevated aspect-video transition-all duration-300 group-hover:border-border-strong group-hover:shadow-elevated">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] via-[#111] to-[#181818]" />
+                  <Overlay />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                </div>
+                <div className="mt-2.5">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-semibold text-content-primary">{name}</p>
+                    <span className="text-[11px] text-content-muted">{assets} assets</span>
+                  </div>
+                  <p className="mt-0.5 text-xs text-content-muted/70 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <p className="mt-10 text-center text-sm text-content-muted">
+            New assets added monthly across all categories · Included in every subscription
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+// ─── 7. How It Works ──────────────────────────────────────────────────────────
+
+function HowItWorksSection() {
+  const steps = [
+    {
+      number: "01",
+      icon: Search,
+      title: "Browse the library",
+      description: "Filter by category, preview every asset in detail, and find exactly what your video needs.",
+    },
+    {
+      number: "02",
+      icon: Download,
+      title: "Download the PSD",
+      description: "One click to download the fully layered Photoshop file. No credits, no export queues — yours instantly.",
+    },
+    {
+      number: "03",
+      icon: Pencil,
+      title: "Edit and export",
+      description: "Open in Photoshop, click the number layer, type your value, export. Done in under 60 seconds.",
+    },
+  ];
+
+  return (
+    <section className="border-t border-border px-6 py-28">
+      <div className="mx-auto max-w-5xl">
+        <Reveal>
+          <div className="mb-16 text-center">
+            <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
+              How it works
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
+              From library to finished thumbnail
+              <br className="hidden sm:block" /> in three steps.
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-0">
+          {steps.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <Reveal key={step.number} delay={i * 100}>
+                <div
+                  className={cn(
+                    "group px-0 md:px-10",
+                    i === 0 && "md:pl-0",
+                    i === steps.length - 1 && "md:pr-0",
+                    i < steps.length - 1 && "border-b border-border pb-12 md:border-b-0 md:border-r md:pb-0"
+                  )}
+                >
+                  <span className="select-none text-5xl font-bold tracking-tightest text-border-strong">
+                    {step.number}
+                  </span>
+                  <div className="mt-5 flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-base-elevated transition-colors duration-300 group-hover:border-accent/30 group-hover:bg-accent/5">
+                    <Icon className="h-4 w-4 text-accent" />
+                  </div>
+                  <h3 className="mt-5 text-base font-semibold text-content-primary">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-content-secondary">{step.description}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 7. Real Thumbnails ───────────────────────────────────────────────────────
 
 const thumbnailData: ThumbnailMockupProps[] = [
   {
@@ -412,16 +718,17 @@ function RealThumbnailsSection() {
     <section className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <Reveal>
-          <div className="mb-12 text-center">
+          <div className="mb-14 text-center">
             <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
-              In a real thumbnail
+              The library in action
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
-              See exactly how they&apos;re used.
+              Real thumbnails.
+              <br />Real assets.
             </h2>
-            <p className="mt-4 mx-auto max-w-xl text-content-secondary">
-              Each asset sits naturally inside a YouTube thumbnail — not like
-              a widget dropped from a dashboard.
+            <p className="mx-auto mt-4 max-w-lg text-content-secondary">
+              Every asset is built to look platform-native — like a real YouTube
+              notification, not a widget dropped from a dashboard.
             </p>
           </div>
         </Reveal>
@@ -438,270 +745,80 @@ function RealThumbnailsSection() {
   );
 }
 
-// ─── 5. Thumbnail Use Cases ───────────────────────────────────────────────────
+// ─── 9. What's Included ──────────────────────────────────────────────────────
 
-const useCases = [
-  {
-    type: "Revenue thumbnails",
-    icon: DollarSign,
-    accent: "text-amber-400",
-    bg: "bg-amber-500/10 border-amber-500/15",
-    description: "Show earnings, payouts, and financial milestones that stop the scroll.",
-    examples: [
-      '"How I Made $24K This Month"',
-      '"My YouTube Revenue Revealed"',
-      '"First $1K Day on Shopify"',
-    ],
-  },
-  {
-    type: "Challenge thumbnails",
-    icon: Flame,
-    accent: "text-orange-400",
-    bg: "bg-orange-500/10 border-orange-500/15",
-    description: "Track day-by-day progress through multi-week experiments and streaks.",
-    examples: [
-      '"30-Day Workout (Day 22)"',
-      '"I Ate One Meal A Day For A Month"',
-      '"Week 6 of My $0 Business"',
-    ],
-  },
-  {
-    type: "Comparison thumbnails",
-    icon: GitCompare,
-    accent: "text-sky-400",
-    bg: "bg-sky-500/10 border-sky-500/15",
-    description: "Create curiosity gaps with clear before/after or best/worst contrasts.",
-    examples: [
-      '"Best vs Worst YouTube Advice"',
-      '"Before & After: My Setup"',
-      '"Old Strategy vs New Results"',
-    ],
-  },
-  {
-    type: "Milestone thumbnails",
-    icon: Users,
-    accent: "text-red-400",
-    bg: "bg-red-500/10 border-red-500/15",
-    description: "Celebrate subscriber counts, view records, and channel achievements.",
-    examples: [
-      '"I Hit 100K Subscribers!"',
-      '"First 1 Million Views"',
-      '"My Channel Just Hit 500K"',
-    ],
-  },
-  {
-    type: "Analytics thumbnails",
-    icon: BarChart2,
-    accent: "text-accent",
-    bg: "bg-accent/10 border-accent/15",
-    description: "Show real CTR, watch time, and performance data that builds credibility.",
-    examples: [
-      '"My CTR Went From 2% to 9%"',
-      '"How I Got 1M Views in 30 Days"',
-      '"Real Channel Stats Exposed"',
-    ],
-  },
-  {
-    type: "Reaction thumbnails",
-    icon: MessageCircle,
-    accent: "text-pink-400",
-    bg: "bg-pink-500/10 border-pink-500/15",
-    description: "Display poll results, community reactions, and engagement stats.",
-    examples: [
-      '"78% of You Got This Wrong"',
-      '"My Community Voted and..."',
-      '"100K People Reacted To This"',
-    ],
-  },
-];
-
-function ThumbnailUseCasesSection() {
-  return (
-    <section className="border-t border-border bg-base-surface px-6 py-24">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <div className="mb-12 text-center">
-            <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
-              What you can build
-            </p>
-            <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
-              Every type of thumbnail. Covered.
-            </h2>
-            <p className="mt-4 text-content-secondary">
-              Six video formats. Twelve asset categories. All the elements you need.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {useCases.map((uc, i) => {
-            const Icon = uc.icon;
-            return (
-              <Reveal key={uc.type} delay={i * 60}>
-                <div className="group flex flex-col gap-4 rounded-xl border border-border bg-base-elevated p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-elevated">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={cn(
-                        "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border",
-                        uc.bg
-                      )}
-                    >
-                      <Icon className={cn("h-4 w-4", uc.accent)} />
-                    </div>
-                    <p className="text-sm font-semibold text-content-primary">{uc.type}</p>
-                  </div>
-                  <p className="text-xs leading-relaxed text-content-secondary">{uc.description}</p>
-                  <ul className="space-y-1.5">
-                    {uc.examples.map((ex) => (
-                      <li key={ex} className="flex items-baseline gap-2">
-                        <span className="mt-[3px] h-1 w-1 flex-shrink-0 rounded-full bg-content-muted" />
-                        <span className="text-xs text-content-muted">{ex}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── 6. How It Works ─────────────────────────────────────────────────────────
-
-function HowItWorksSection() {
-  const steps = [
+function WhatsIncludedSection() {
+  const tiles = [
     {
-      number: "01",
-      icon: Search,
-      title: "Browse the library",
-      description:
-        "Filter by category, preview every asset in detail, and find the exact thumbnail graphic you need.",
+      icon: Layers,
+      label: "Fully layered PSD",
+      desc: "Every element on its own named layer. Click, type, export. Done.",
     },
     {
-      number: "02",
+      icon: RefreshCw,
+      label: "New assets monthly",
+      desc: "The library grows every month. Everything added is yours automatically.",
+    },
+    {
       icon: Download,
-      title: "Download the PSD",
-      description:
-        "One click to download the fully layered file. No credits, no limits — yours instantly.",
+      label: "Instant download",
+      desc: "One click. No export queue, no credits. The file is yours immediately.",
     },
     {
-      number: "03",
-      icon: Pencil,
-      title: "Edit and export",
-      description:
-        "Open in Photoshop, click the number layer, type your value, export. Done in under 60 seconds.",
+      icon: Shield,
+      label: "Commercial license",
+      desc: "Use in your own videos, for clients, or any sponsored content.",
     },
   ];
 
   return (
-    <section className="border-t border-border px-6 py-28">
+    <section className="border-t border-border bg-base-surface px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <div className="mb-14 text-center">
             <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
-              How it works
+              Your membership
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
-              Three steps. Done.
+              One subscription. Full access.
             </h2>
+            <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-content-secondary">
+              No per-asset fees, no credits, no hidden tiers. Subscribe once
+              and every asset in the library — past and future — is yours.
+            </p>
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          {steps.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <Reveal key={step.number} delay={i * 100}>
-                <div className="group flex flex-col gap-6 rounded-xl border border-border bg-base-surface p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-elevated">
-                  <div className="flex items-start justify-between">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-base-elevated transition-colors duration-300 group-hover:border-accent/30">
-                      <Icon className="h-4 w-4 text-accent" />
-                    </div>
-                    <span className="select-none text-3xl font-bold tracking-tightest text-border-strong">
-                      {step.number}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="mb-2 text-base font-semibold text-content-primary">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-content-secondary">
-                      {step.description}
-                    </p>
-                  </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {tiles.map(({ icon: Icon, label, desc }, i) => (
+            <Reveal key={label} delay={i * 70}>
+              <div className="group rounded-xl border border-border bg-base-elevated p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-elevated">
+                <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-base-surface transition-colors duration-300 group-hover:border-accent/30 group-hover:bg-accent/5">
+                  <Icon className="h-4 w-4 text-accent" />
                 </div>
-              </Reveal>
-            );
-          })}
+                <p className="mb-1.5 text-sm font-semibold text-content-primary">{label}</p>
+                <p className="text-sm leading-relaxed text-content-secondary">{desc}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
-      </div>
-    </section>
-  );
-}
 
-// ─── 8. Features ──────────────────────────────────────────────────────────────
-
-function FeaturesSection() {
-  const features = [
-    {
-      icon: Layers,
-      title: "Fully layered PSD files",
-      description:
-        "Every element on its own layer — text, backgrounds, icons, glows, effects. Open in Photoshop and change anything in under a minute.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Curated, not crowded",
-      description:
-        "Every asset passes a quality standard before it ships. No filler, no noise, no half-finished work. Only premium graphics worth using.",
-    },
-    {
-      icon: Sparkles,
-      title: "New assets every month",
-      description:
-        "The library grows with new additions each month. Your membership keeps pace — you'll always have fresh material.",
-    },
-  ];
-
-  return (
-    <section className="border-t border-border bg-base-surface px-6 py-28">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <div className="mb-16 text-center">
-            <p className="mb-4 text-xs font-medium tracking-widest text-content-muted uppercase">
-              What you get
-            </p>
-            <h2 className="text-3xl font-semibold tracking-tight text-content-primary md:text-4xl">
-              Quality without compromise.
-            </h2>
+        <Reveal delay={320}>
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/signup"
+              className={cn(buttonVariants({ size: "lg" }), "active:scale-[0.97] transition-transform")}
+            >
+              Get access
+            </Link>
+            <Link
+              href="/pricing"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "active:scale-[0.97] transition-transform")}
+            >
+              See pricing
+            </Link>
           </div>
         </Reveal>
-
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-          {features.map((feature, i) => {
-            const Icon = feature.icon;
-            return (
-              <Reveal key={feature.title} delay={i * 100}>
-                <div className="group flex flex-col gap-5">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-base-elevated transition-all duration-300 group-hover:border-accent/30">
-                    <Icon className="h-4 w-4 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="mb-2 text-base font-semibold text-content-primary">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-content-secondary">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
       </div>
     </section>
   );
@@ -711,37 +828,48 @@ function FeaturesSection() {
 
 function CtaSection() {
   return (
-    <section className="border-t border-border px-6 py-28">
-      <div className="mx-auto max-w-2xl text-center">
+    <section className="relative overflow-hidden border-t border-border px-6 py-32">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-full"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 100%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.03] blur-3xl animate-float"
+        style={{ background: "radial-gradient(circle, #C9A96E 0%, transparent 70%)" }}
+      />
+
+      <div className="relative mx-auto max-w-2xl text-center">
         <Reveal>
-          <h2 className="text-3xl font-semibold tracking-tightest text-content-primary md:text-4xl">
-            Stop starting from scratch.
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-content-secondary">
-            Join Vaulted and get instant access to a growing library of premium
-            PSD thumbnail assets across 12 categories.
+          <p className="mb-5 text-xs font-medium tracking-widest text-content-muted uppercase">
+            Ready to upgrade?
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <h2 className="text-4xl font-semibold tracking-tightest text-content-primary md:text-5xl">
+            Your thumbnails
+            <br />
+            deserve better.
+          </h2>
+          <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-content-secondary">
+            Join 1,200+ YouTube creators using Vaulted to build scroll-stopping
+            thumbnails in minutes, not hours.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/signup"
-              className={cn(
-                buttonVariants({ size: "xl" }),
-                "active:scale-[0.97] transition-transform"
-              )}
+              className={cn(buttonVariants({ size: "xl" }), "active:scale-[0.97] transition-transform")}
             >
               Get access
             </Link>
             <Link
               href="/pricing"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "xl" }),
-                "active:scale-[0.97] transition-transform"
-              )}
+              className={cn(buttonVariants({ variant: "outline", size: "xl" }), "active:scale-[0.97] transition-transform")}
             >
               See pricing
             </Link>
           </div>
-          <p className="mt-5 text-sm text-content-muted">
+          <p className="mt-6 text-sm text-content-muted">
             Monthly from $19 · Yearly from $149 · Cancel anytime
           </p>
         </Reveal>
@@ -755,15 +883,46 @@ function CtaSection() {
 export default function HomePage() {
   return (
     <>
+      {/* 1 — Hook: headline + live preview */}
       <HeroSection />
-      <ProblemSection />
-      <SolutionSection />
+
+      {/* 2 — Quick credibility */}
+      <StatsStrip />
+
+      {/* 3 — Show the product immediately, before explaining it */}
       <RealThumbnailsSection />
-      <ThumbnailUseCasesSection />
+
+      {/* 4 — Show the full library breadth */}
+      <CategoryShowcaseSection />
+
+      {/* 5 — Now that they've seen it, the problem lands harder */}
+      <ProblemSection />
+
+      {/* 6 — Us vs them */}
+      <ComparisonSection />
+
+      {/* 7 — How simple it actually is */}
       <HowItWorksSection />
+
+      {/* 8 — Who exactly it's for (self-identification) */}
+      <ForCreatorsSection />
+
+      {/* 9 — What the membership includes */}
+      <WhatsIncludedSection />
+
+      {/* 10 — Show the PSD quality up close */}
       <PsdShowcase />
+
+      {/* 11 — Social proof */}
       <TestimonialsSection />
-      <FeaturesSection />
+
+      {/* 12 — Price (after trust is established) */}
+      <PricingPreviewSection />
+
+      {/* 13 — Handle last objections */}
+      <FAQSection />
+
+      {/* 14 — Close */}
       <CtaSection />
     </>
   );

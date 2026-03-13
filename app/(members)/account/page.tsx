@@ -13,12 +13,13 @@ export const metadata: Metadata = {
 export default async function AccountPage() {
   const supabase = await getSupabaseServerClient();
   const user = supabase ? (await supabase.auth.getUser()).data.user : null;
+  const demoMode = !process.env.NEXT_PUBLIC_SUPABASE_URL;
 
-  if (!user) {
+  if (!user && !demoMode) {
     redirect("/login");
   }
 
-  const memberSince = user.created_at ? formatDate(user.created_at) : "—";
+  const memberSince = user?.created_at ? formatDate(user.created_at) : "—";
 
   return (
     <div className="px-6 py-10">
@@ -43,7 +44,7 @@ export default async function AccountPage() {
               <div>
                 <p className="mb-1 text-xs text-content-muted">Email address</p>
                 <p className="text-sm font-medium text-content-primary">
-                  {user.email}
+                  {user?.email ?? "demo@vaulted.app"}
                 </p>
               </div>
 

@@ -3,7 +3,6 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 import { Search, X } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils/cn";
 import { siteConfig } from "@/lib/config/site";
 
@@ -58,14 +57,14 @@ export function LibraryFilters({ activeCategory, activeSearch }: LibraryFiltersP
   const categories = [ALL_LABEL, ...siteConfig.categories];
 
   return (
-    <div className="mb-8 space-y-4">
+    <div className="space-y-4">
       {/* Search */}
-      <div className="relative max-w-sm">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-content-muted" />
-        <Input
+      <div className="relative max-w-xs">
+        <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-content-muted pointer-events-none" />
+        <input
           type="search"
           placeholder="Search assets…"
-          className="pl-9 pr-8"
+          className="h-9 w-full rounded-lg border border-border bg-base-elevated pl-9 pr-8 text-sm text-content-primary placeholder:text-content-muted focus:border-border-strong focus:outline-none transition-colors"
           value={activeSearch ?? ""}
           onChange={handleSearch}
         />
@@ -79,11 +78,10 @@ export function LibraryFilters({ activeCategory, activeSearch }: LibraryFiltersP
         )}
       </div>
 
-      {/* Category tabs */}
+      {/* Category pills — wrapping */}
       <div className="flex flex-wrap gap-2">
         {categories.map((cat) => {
-          const isActive =
-            cat === ALL_LABEL ? !activeCategory : activeCategory === cat;
+          const isActive = cat === ALL_LABEL ? !activeCategory : activeCategory === cat;
           return (
             <button
               key={cat}
@@ -91,7 +89,7 @@ export function LibraryFilters({ activeCategory, activeSearch }: LibraryFiltersP
               className={cn(
                 "rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors",
                 isActive
-                  ? "bg-accent/20 text-accent border border-accent/30"
+                  ? "bg-accent/15 text-accent border border-accent/25"
                   : "border border-border bg-base-elevated text-content-muted hover:border-border-strong hover:text-content-secondary"
               )}
             >

@@ -37,12 +37,15 @@ export function Nav({ isLoggedIn }: NavProps) {
         <nav className="flex items-center gap-7">
           {navLink("/pricing", "Pricing")}
           {isLoggedIn ? (
-            <Link
-              href="/library"
-              className={cn(buttonVariants({ size: "sm" }))}
-            >
-              Go to library
-            </Link>
+            <>
+              {navLink("/account", "Account")}
+              <Link
+                href="/library"
+                className={cn(buttonVariants({ size: "sm" }))}
+              >
+                Library
+              </Link>
+            </>
           ) : (
             <>
               {navLink("/login", "Sign in")}

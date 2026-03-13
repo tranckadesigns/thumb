@@ -70,6 +70,8 @@ const config: Config = {
         shimmer: "shimmer 3s linear infinite",
         "accent-dot": "accentDot 3s ease-in-out infinite",
         "border-glow": "borderGlow 4s ease-in-out infinite",
+        float: "float 8s ease-in-out infinite",
+        "float-delayed": "float 8s ease-in-out 4s infinite",
       },
       keyframes: {
         fadeIn: {
@@ -99,6 +101,10 @@ const config: Config = {
         borderGlow: {
           "0%, 100%": { boxShadow: "0 0 0 0 rgba(201,169,110,0)" },
           "50%": { boxShadow: "0 0 20px 2px rgba(201,169,110,0.12)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-14px)" },
         },
       },
     },

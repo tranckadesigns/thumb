@@ -9,7 +9,8 @@ export async function refreshSessionInMiddleware(
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
-    return { user: null };
+    // No Supabase configured — demo mode, treat as authenticated.
+    return { user: { id: "demo", email: "demo@vaulted.app" } };
   }
 
   const supabase = createServerClient(url, key, {

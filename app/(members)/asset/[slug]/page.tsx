@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, FileImage, Tag } from "lucide-react";
-import type { OverlayType } from "@/components/marketing/asset-overlays";
 import {
   YouTubeRevenueOverlay,
   StripePayoutOverlay,
@@ -19,6 +18,30 @@ import {
   PollResultOverlay,
   ReactionBubbleOverlay,
   BeforeAfterOverlay,
+  AdSenseRevenueOverlay,
+  PayPalPayoutOverlay,
+  LiveTickerOverlay,
+  OneMilOverlay,
+  WeeklyGainOverlay,
+  ViewsMilestoneOverlay,
+  ChannelStatsOverlay,
+  BreakingNewsOverlay,
+  NotificationCardOverlay,
+  TwitterCardOverlay,
+  TikTokFYPOverlay,
+  DigitalSaleOverlay,
+  CourseEnrollmentOverlay,
+  WatchTimeOverlay,
+  ImpressionsOverlay,
+  HundredDayChallengeOverlay,
+  WeeklyStreakOverlay,
+  OldVsNewOverlay,
+  ProductScoreOverlay,
+  AppStoreRatingOverlay,
+  EventCountdownOverlay,
+  StreamGoLiveOverlay,
+  CommunityVoteOverlay,
+  LiveChatOverlay,
 } from "@/components/marketing/asset-overlays";
 import type { AssetCategory } from "@/types/asset";
 import { assetService } from "@/lib/services/index";
@@ -27,39 +50,48 @@ import { Badge } from "@/components/ui/badge";
 import { formatFileSize } from "@/lib/utils/format";
 import { cn } from "@/lib/utils/cn";
 
-// ─── Overlay mapping ───────────────────────────────────────────────────────────
+// ─── Per-slug overlay mapping (matches library cards exactly) ─────────────────
 
-const categoryOverlayMap: Record<AssetCategory, OverlayType> = {
-  Revenue: "revenue",
-  Subscribers: "milestone",
-  Growth: "growth",
-  Alerts: "alert",
-  Social: "instagram",
-  Commerce: "shopify",
-  Analytics: "ctr",
-  Challenges: "challenge",
-  Comparisons: "bestworst",
-  Ratings: "rating",
-  Timers: "countdown",
-  Reactions: "reaction",
-};
-
-const overlayComponents: Record<OverlayType, () => React.ReactElement> = {
-  revenue: YouTubeRevenueOverlay,
-  payout: StripePayoutOverlay,
-  milestone: SubscriberMilestoneOverlay,
-  shopify: ShopifySalesOverlay,
-  ctr: CTRAnalyticsOverlay,
-  instagram: InstagramAlertOverlay,
-  growth: GrowthChartOverlay,
-  alert: AlertBannerOverlay,
-  bestworst: BestWorstOverlay,
-  rating: RatingStarsOverlay,
-  countdown: CountdownTimerOverlay,
-  challenge: ChallengeProgressOverlay,
-  poll: PollResultOverlay,
-  reaction: ReactionBubbleOverlay,
-  beforeafter: BeforeAfterOverlay,
+const slugOverlayMap: Record<string, () => React.ReactElement> = {
+  "youtube-revenue-alert":       YouTubeRevenueOverlay,
+  "stripe-payout-notification":  StripePayoutOverlay,
+  "adsense-revenue-card":        AdSenseRevenueOverlay,
+  "paypal-payout-badge":         PayPalPayoutOverlay,
+  "100k-subscriber-milestone":   SubscriberMilestoneOverlay,
+  "subscriber-count-ticker":     LiveTickerOverlay,
+  "1m-subscriber-badge":         OneMilOverlay,
+  "weekly-subscriber-gain":      WeeklyGainOverlay,
+  "viral-growth-chart":          GrowthChartOverlay,
+  "views-milestone-popup":       ViewsMilestoneOverlay,
+  "channel-performance-card":    ChannelStatsOverlay,
+  "real-time-alert-banner":      AlertBannerOverlay,
+  "breaking-update-banner":      BreakingNewsOverlay,
+  "important-notification-card": NotificationCardOverlay,
+  "instagram-follower-spike":    InstagramAlertOverlay,
+  "twitter-viral-card":          TwitterCardOverlay,
+  "tiktok-fyp-badge":            TikTokFYPOverlay,
+  "shopify-sales-dashboard":     ShopifySalesOverlay,
+  "digital-product-sale-badge":  DigitalSaleOverlay,
+  "course-enrollment-counter":   CourseEnrollmentOverlay,
+  "ctr-analytics-display":       CTRAnalyticsOverlay,
+  "watch-time-dashboard":        WatchTimeOverlay,
+  "impressions-analytics-card":  ImpressionsOverlay,
+  "30-day-challenge-progress":   ChallengeProgressOverlay,
+  "100-day-challenge-tracker":   HundredDayChallengeOverlay,
+  "weekly-streak-badge":         WeeklyStreakOverlay,
+  "best-vs-worst-comparison":    BestWorstOverlay,
+  "before-after-reveal":         BeforeAfterOverlay,
+  "old-vs-new-comparison":       OldVsNewOverlay,
+  "five-star-rating-display":    RatingStarsOverlay,
+  "product-score-badge":         ProductScoreOverlay,
+  "app-store-rating-card":       AppStoreRatingOverlay,
+  "launch-countdown-timer":      CountdownTimerOverlay,
+  "live-event-countdown":        EventCountdownOverlay,
+  "stream-golive-timer":         StreamGoLiveOverlay,
+  "poll-result-overlay":         PollResultOverlay,
+  "reaction-bubble-overlay":     ReactionBubbleOverlay,
+  "community-vote-card":         CommunityVoteOverlay,
+  "live-chat-reactions":         LiveChatOverlay,
 };
 
 const categoryBadgeColors: Record<AssetCategory, string> = {
@@ -95,8 +127,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
 
   if (!asset) notFound();
 
-  const overlayKey = categoryOverlayMap[asset.category];
-  const OverlayComponent = overlayComponents[overlayKey];
+  const OverlayComponent = slugOverlayMap[asset.slug] ?? YouTubeRevenueOverlay;
 
   return (
     <div className="px-6 py-10">

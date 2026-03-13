@@ -9,10 +9,11 @@ export default async function MarketingLayout({
 }) {
   const supabase = await getSupabaseServerClient();
   const user = supabase ? (await supabase.auth.getUser()).data.user : null;
+  const demoMode = !process.env.NEXT_PUBLIC_SUPABASE_URL;
 
   return (
     <>
-      <Nav isLoggedIn={!!user} />
+      <Nav isLoggedIn={!!user || demoMode} />
       <main className="pt-14">{children}</main>
       <Footer />
     </>
