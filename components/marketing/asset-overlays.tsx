@@ -1,4 +1,4 @@
-import { TrendingUp, DollarSign, ShoppingBag, BarChart2, Instagram, Users } from "lucide-react";
+import { TrendingUp, DollarSign, ShoppingBag, BarChart2, Instagram, Users, Lock } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 // ─── Platform Signal Overlays ─────────────────────────────────────────────────
@@ -646,7 +646,7 @@ export function TwitterCardOverlay() {
             </svg>
           </div>
         </div>
-        <p className="text-[10px] text-white/80 leading-relaxed mb-2.5">This one video made $24K in a single month. Here's the exact framework I used 🧵</p>
+        <p className="text-[10px] text-white/80 leading-relaxed mb-2.5">This one video made $24K in a single month. Here&apos;s the exact framework I used 🧵</p>
         <div className="flex items-center gap-3 text-white/40">
           <span className="text-[9px]">💬 847</span>
           <span className="text-[9px]">🔁 2.4K</span>
@@ -822,7 +822,7 @@ export function WeeklyStreakOverlay() {
         <div className="text-3xl mb-1">🔥</div>
         <p className="text-3xl font-black tracking-tighter text-white">24</p>
         <p className="text-xs font-semibold text-[#FB923C]">Week Streak</p>
-        <p className="mt-1.5 text-[9px] text-white/40">Upload every week · Don't break it</p>
+        <p className="mt-1.5 text-[9px] text-white/40">Upload every week · Don&apos;t break it</p>
         <div className="mt-3 flex justify-center gap-1">
           {[...Array(7)].map((_, i) => (
             <div key={i} className={`h-1.5 w-4 rounded-full ${i < 5 ? "bg-[#FB923C]" : "bg-white/10"}`} />
@@ -1247,12 +1247,14 @@ export function AssetCard({ overlayType, title, className }: AssetCardProps) {
       </div>
 
       {/* Members only lock overlay — revealed on hover */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-base/85 opacity-0 backdrop-blur-[6px] transition-opacity duration-200 group-hover:opacity-100">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-accent/10">
-          <span className="text-lg">🔒</span>
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 pb-8 opacity-0 backdrop-blur-[8px] transition-opacity duration-300 group-hover:opacity-100" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.82) 100%)" }}>
+        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5">
+          <Lock className="h-3.5 w-3.5 text-white/60" strokeWidth={1.5} />
         </div>
-        <p className="text-sm font-semibold text-content-primary">Members only</p>
-        <p className="text-xs text-content-muted">Subscribe to download</p>
+        <div className="text-center">
+          <p className="text-[11px] font-semibold tracking-widest text-white/80 uppercase">Members only</p>
+          <p className="mt-1 text-[10px] text-white/35 tracking-wide">Subscribe to unlock</p>
+        </div>
       </div>
 
       {/* Bottom meta bar */}

@@ -1,5 +1,6 @@
 import { Nav } from "@/components/marketing/nav";
 import { Footer } from "@/components/marketing/footer";
+import { MagneticLiquid } from "@/components/marketing/magnetic-liquid";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function MarketingLayout({
@@ -14,6 +15,7 @@ export default async function MarketingLayout({
   return (
     <>
       <Nav isLoggedIn={!!user || demoMode} />
+      <MagneticLiquid targetId="hero-get-access" />
       <main className="pt-14">{children}</main>
       <Footer />
     </>

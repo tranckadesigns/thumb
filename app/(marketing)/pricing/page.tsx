@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { FeaturedPlanCard } from "@/components/marketing/featured-plan-card";
 import { Separator } from "@/components/ui/separator";
 import { AssetCard } from "@/components/marketing/asset-overlays";
 import { siteConfig } from "@/lib/config/site";
@@ -165,14 +166,15 @@ function PlanCard({
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
       )}
 
+      {featured && (
+        <div className="absolute top-4 right-4">
+          <Badge variant="default" className="px-3 py-1 text-xs">
+            Best value
+          </Badge>
+        </div>
+      )}
+
       <div className="p-8">
-        {featured && (
-          <div className="mb-5">
-            <Badge variant="default" className="px-3 py-1 text-xs">
-              Best value
-            </Badge>
-          </div>
-        )}
 
         <p className="mb-1 text-xs font-medium tracking-widest text-content-muted uppercase">
           {plan.label}
@@ -199,19 +201,29 @@ function PlanCard({
           </div>
         )}
 
-        <Link
-          href="/signup"
-          className={cn(
-            buttonVariants({
-              variant: featured ? "default" : "secondary",
-              size: "lg",
-            }),
-            "w-full justify-center mt-7"
-          )}
-        >
-          Get started
-          <ChevronRight className="h-4 w-4" />
-        </Link>
+        {featured ? (
+          <Link
+            href="/signup"
+            className={cn(
+              buttonVariants({ variant: "default", size: "lg" }),
+              "w-full justify-center mt-7"
+            )}
+          >
+            Get started
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+        ) : (
+          <Link
+            href="/signup"
+            className={cn(
+              buttonVariants({ variant: "secondary", size: "lg" }),
+              "w-full justify-center mt-7"
+            )}
+          >
+            Get started
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+        )}
       </div>
 
       {/* Feature list */}
@@ -269,7 +281,7 @@ function PricingCards() {
       <div className="mx-auto max-w-2xl">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <PlanCard planId="monthly" />
-          <PlanCard planId="yearly" featured />
+          <FeaturedPlanCard />
         </div>
         <p className="mt-6 text-center text-xs text-content-muted">
           Secure checkout · Cancel anytime · Instant access

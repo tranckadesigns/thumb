@@ -206,6 +206,7 @@ function HeroSection() {
           <Reveal delay={300}>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link
+                id="hero-get-access"
                 href="/signup"
                 className={cn(buttonVariants({ size: "lg" }), "active:scale-[0.97] transition-transform")}
               >
